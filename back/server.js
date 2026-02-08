@@ -9,14 +9,15 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-app.use("/api", userRoutes);
-app.get("/",(req,res)=>{
-  res.json("back-end working perfectly.. paramesh!")
+app.use("/api/users", userRoutes);
+
+app.get("/", (req, res) => {
+  res.json("Back-end working perfectly 🚀");
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+// ❌ NO app.listen()
+// ✅ Export app for Vercel
+export default app;
